@@ -1,0 +1,20 @@
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  image: alpine:latest
+  script:
+    - mkdir -p dist
+    - cp index.html style.css script.js dist/
+    - echo "TaskFlow build files prepared successfully."
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  image: node:20-alpine
+  script:
+    - node test.js
